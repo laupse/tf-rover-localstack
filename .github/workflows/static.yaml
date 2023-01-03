@@ -50,4 +50,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
         with:
-          name: rover-${{ github.sha }}
+          artifact_name: rover-${{ github.sha }}
