@@ -45,6 +45,9 @@ jobs:
         with:
           # Upload entire repository
           path: "./html"
+          name: rover-${{ github.sha }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+        with:
+          name: rover-${{ github.sha }}
