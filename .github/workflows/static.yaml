@@ -3,7 +3,7 @@ name: Deploy rover to Pages
 
 on:
   # Runs on pushes targeting the default branch
-  push:
+  pull_request:
     branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -26,7 +26,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     environment:
-      name: rover-${{ github.sha }}
+      name: ${{ github.ref }}
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
@@ -44,9 +44,9 @@ jobs:
         with:
           # Upload entire repository
           path: "./build"
-          name: rover-${{ github.sha }}
+          name: ${{ github.sha }}
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
         with:
-          artifact_name: rover-${{ github.sha }}
+          artifact_name: ${{ github.sha }}
