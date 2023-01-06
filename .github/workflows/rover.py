@@ -28,12 +28,12 @@ def main():
         _ = (client
              .container()
              .from_("alpine:3.17")
-             .with_workdir("./static")
+             .with_workdir("./build")
              .with_file("rover.zip", static_file_zip)
              .exec(["unzip", "rover.zip"])
              .exec(["rm", "rover.zip"])
              .directory(".")
-             .export("html")
+             .export("build")
              )
 
 
